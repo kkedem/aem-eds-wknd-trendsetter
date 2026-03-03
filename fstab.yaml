@@ -1,0 +1,32 @@
+# fstab.yaml — EDS Mount Points
+# Maps EDS URL paths to AEM Publish content roots.
+# Each locale's Live Copy is mounted independently (MSM-aware).
+#
+# AEM environment: Adobe Experience Manager as a Cloud Service
+# Program: wknd-trendsetters  |  Environment: production
+
+mountpoints:
+  # ── English (Blueprint / Master) ──────────────────────────────
+  /:
+    url: https://publish-p00000-e00000.adobeaemcloud.com/content/wknd-trendsetters/en
+    type: markup
+
+  # ── German (MSM Live Copy) ─────────────────────────────────────
+  /de:
+    url: https://publish-p00000-e00000.adobeaemcloud.com/content/wknd-trendsetters/de
+    type: markup
+
+  # ── French (MSM Live Copy) ─────────────────────────────────────
+  /fr:
+    url: https://publish-p00000-e00000.adobeaemcloud.com/content/wknd-trendsetters/fr
+    type: markup
+
+  # ── Spanish (MSM Live Copy) ────────────────────────────────────
+  /es:
+    url: https://publish-p00000-e00000.adobeaemcloud.com/content/wknd-trendsetters/es
+    type: markup
+
+  # ── DAM Assets (shared across all locales) ─────────────────────
+  /content/dam:
+    url: https://publish-p00000-e00000.adobeaemcloud.com/content/dam/wknd-trendsetters
+    type: markup

@@ -1,0 +1,251 @@
+/* ── Nav Block ─────────────────────────────────────────────────────
+ * Sticky header with logo, mega-menu dropdowns, and subscribe CTA.
+ * AEM content source: /content/wknd-trendsetters/en/nav
+ * ─────────────────────────────────────────────────────────────── */
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  height: var(--nav-height);
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-gray-200);
+  transition: box-shadow var(--transition-base);
+}
+
+header.scrolled {
+  box-shadow: var(--shadow-md);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-xl);
+  gap: var(--space-xl);
+}
+
+/* ── Brand ─────────────────────────────────────────────────────── */
+.nav-brand {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-decoration: none;
+}
+
+.nav-brand img {
+  height: 36px;
+  width: auto;
+}
+
+.nav-brand-text {
+  font-family: var(--font-heading);
+  font-size: var(--text-xl);
+  font-weight: var(--font-bold);
+  color: var(--color-black);
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.nav-brand-text span {
+  color: var(--color-accent);
+}
+
+/* ── Primary nav ───────────────────────────────────────────────── */
+.nav-sections {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: var(--space-xs);
+}
+
+.nav-sections > li {
+  position: relative;
+}
+
+.nav-sections > li > a,
+.nav-sections > li > button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0.5rem var(--space-md);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--color-gray-700);
+  text-decoration: none;
+  background: none;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: color var(--transition-fast), background var(--transition-fast);
+  white-space: nowrap;
+}
+
+.nav-sections > li > a:hover,
+.nav-sections > li > button:hover,
+.nav-sections > li.active > a,
+.nav-sections > li.active > button {
+  color: var(--color-accent);
+  background: var(--color-accent-light);
+}
+
+/* Dropdown arrow */
+.nav-sections > li > button::after {
+  content: '';
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid currentColor;
+  transition: transform var(--transition-fast);
+}
+
+.nav-sections > li.active > button::after {
+  transform: rotate(180deg);
+}
+
+/* ── Dropdown menu ─────────────────────────────────────────────── */
+.nav-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  min-width: 180px;
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  padding: var(--space-sm);
+  list-style: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-fast), transform var(--transition-fast), visibility var(--transition-fast);
+}
+
+.nav-sections > li.active .nav-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.nav-dropdown li a {
+  display: block;
+  padding: 0.5rem var(--space-md);
+  font-size: var(--text-sm);
+  color: var(--color-gray-700);
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  transition: color var(--transition-fast), background var(--transition-fast);
+}
+
+.nav-dropdown li a:hover {
+  color: var(--color-accent);
+  background: var(--color-accent-light);
+}
+
+/* ── Nav tools (right side) ────────────────────────────────────── */
+.nav-tools {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.nav-subscribe {
+  padding: 0.5rem 1.25rem;
+  background: var(--color-accent);
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+
+.nav-subscribe:hover {
+  background: var(--color-accent-dark);
+  color: var(--color-white);
+  transform: translateY(-1px);
+}
+
+/* ── Mobile toggle ─────────────────────────────────────────────── */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.nav-hamburger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--color-black);
+  border-radius: 2px;
+  transition: all var(--transition-base);
+}
+
+.nav-hamburger.open span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+/* ── Mobile menu ───────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .nav-hamburger { display: flex; }
+
+  .nav-sections,
+  .nav-tools .nav-subscribe {
+    display: none;
+  }
+
+  .nav-sections.open {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: var(--nav-height);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--color-white);
+    padding: var(--space-xl);
+    overflow-y: auto;
+    gap: var(--space-xs);
+  }
+
+  .nav-sections.open .nav-subscribe-mobile {
+    display: inline-flex;
+    margin-top: var(--space-lg);
+  }
+
+  .nav-dropdown {
+    position: static;
+    transform: none;
+    box-shadow: none;
+    border: none;
+    background: var(--color-gray-50);
+    border-radius: var(--radius-md);
+    padding-left: var(--space-md);
+  }
+
+  .nav-sections > li.active .nav-dropdown {
+    transform: none;
+  }
+}

@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="WKND Trendsetters — Fresh looks, bold stories, real life. Your go-to destination for style inspiration." />
+  <meta name="keywords" content="fashion, style, trends, streetwear, lifestyle" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="WKND Trendsetters" />
+  <meta property="og:description" content="Fresh looks, bold stories, real life." />
+  <meta property="og:type" content="website" />
+
+  <title>WKND Trendsetters | Fresh Looks, Bold Stories</title>
+
+  <!--
+    EDS Loading Strategy:
+    1. styles.css loaded eagerly (render-critical)
+    2. scripts.js is a module (deferred by default)
+    3. Block CSS/JS is lazy-loaded per block by aem.js
+  -->
+  <link rel="stylesheet" href="/styles/styles.css" />
+  <script type="module" src="/scripts/scripts.js"></script>
+
+  <!-- Preconnect for Google Fonts (already in styles.css @import) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+</head>
+<body>
+
+  <!--
+    ═══════════════════════════════════════════════════════════════
+    HEADER — populated dynamically by blocks/nav/nav.js
+    AEM source: /content/wknd-trendsetters/en/nav
+    ═══════════════════════════════════════════════════════════════
+  -->
+  <header></header>
+
+  <!--
+    ═══════════════════════════════════════════════════════════════
+    MAIN — Content delivered from AEM Publish
+    Each top-level <div> = one Section (decorated by scripts.js)
+    Each named <div> inside = one Block (auto-loads its CSS+JS)
+    ═══════════════════════════════════════════════════════════════
+  -->
+  <main>
+
+    <!-- ── NAV trigger (loads nav fragment) ───────────────────── -->
+    <div>
+      <div class="nav">
+        <div><div><a href="/nav">Nav</a></div></div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         SECTION 1: HERO CAROUSEL
+         AEM component: WKND Hero (multi-field slides)
+         ══════════════════════════════════════════════════════════ -->
+    <div class="full-width">
+      <div class="hero">
+
+        <!-- Slide 1 -->
+        <div>
+          <div>
+            <p>Street Culture</p>
+            <h1>Fresh looks,<br>bold stories,<br>real life.</h1>
+            <p>Dive into our latest style adventures—see how young trendsetters own every moment, from courtside to the dance floor.</p>
+            <p>
+              <a href="/trends">Explore Trends</a>
+              <a href="/blog">Read Stories</a>
+            </p>
+          </div>
+          <div>
+            <picture>
+              <source srcset="https://picsum.photos/seed/hiphop/1600/900" media="(min-width:600px)" />
+              <img src="https://picsum.photos/seed/hiphop/800/600" alt="Hip-hop dance scene" loading="eager" fetchpriority="high" />
+            </picture>
+          </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div>
+          <div>
+            <p>Family Vibes</p>
+            <h2>Style that<br>travels with you.</h2>
+            <p>From beach vacations to city breaks—effortless looks for every adventure your family goes on together.</p>
+            <p>
+              <a href="/trends/casual">Casual Style</a>
+              <a href="/explore/travel">Travel Looks</a>
+            </p>
+          </div>
+          <div>
+            <picture>
+              <source srcset="https://picsum.photos/seed/vacation/1600/900" media="(min-width:600px)" />
+              <img src="https://picsum.photos/seed/vacation/800/600" alt="Family vacation style" loading="lazy" />
+            </picture>
+          </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div>
+          <div>
+            <p>Night Out</p>
+            <h2>Own the room,<br>own the night.</h2>
+            <p>Concert season is here. Discover the fits that make you the most memorable person in the crowd.</p>
+            <p>
+              <a href="/trends/inspo">Get Inspired</a>
+              <a href="/explore/night">Night Looks</a>
+            </p>
+          </div>
+          <div>
+            <picture>
+              <source srcset="https://picsum.photos/seed/concert/1600/900" media="(min-width:600px)" />
+              <img src="https://picsum.photos/seed/concert/800/600" alt="Concert fashion scene" loading="lazy" />
+            </picture>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+         SECTION 2: BREADCRUMB + ARTICLE HEADER
+         ══════════════════════════════════════════════════════════ -->
+    <div>
+      <div class="breadcrumb">
+        <div><div>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/blog">Case studies</a></li>
+          </ul>
+        </div></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="article-header">
+        <!-- Row 1: Category label -->
+        <div><div>Style Feature</div></div>
+        <!-- Row 2: Title -->
+        <div><div><h1>Fresh looks, bold moves, real stories</h1></div></div>
+        <!-- Row 3: Author | Date | Read time -->
+        <div>
+          <div>Taylor Brooks</div>
+          <div>June 12, 2024</div>
+          <div>4 min read</div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+         SECTION 3: STYLE GALLERY
+         AEM component: WKND Gallery (multi-image DAM picker)
+         ══════════════════════════════════════════════════════════ -->
+    <div>
+      <div class="gallery">
+
+        <!-- Optional header row -->
+        <div><div>
+          <span class="section-label">Style Gallery</span>
+          <h2>Fresh looks in the wild</h2>
+        </div></div>
+
+        <!-- 8 gallery images -->
+        <div>
+          <div><picture><img src="https://picsum.photos/seed/dance1/600/600" alt="Hip-hop dance fashion" loading="lazy" /></picture></div>
+          <div>Dance floor vibes</div>
+        </div>
+        <div>
+          <div><picture><img src="https://picsum.photos/seed/beach1/600/600" alt="Beach style" loading="lazy" /></picture></div>
+          <div>Sunkissed looks</div>
+        </div>
+        <div>
+          <div><picture><img src="https://picsum.photos/seed/concert1/600/600" alt="Concert outfit" loading="lazy" /></picture></div>
+          <div>Front row ready</div>
+        </div>
+        <div>
+          <div><picture><img src="https://picsum.photos/seed/campus1/600/600" alt="Campus style" loading="lazy" /></picture></div>
+          <div>Campus cool</div>
+        </div>
+        <div>
+          <div><picture><img src="https://picsum.photos/seed/gaming1/600/600" alt="Gaming session style" loading="lazy" /></picture></div>
+          <div>Game day fits</div>
+        </div>
+        <div>
+          <div><picture><img src="https://picsum.photos/seed/street1/600/600" alt="Streetwear" loading="lazy" /></picture></div>
+          <div>Street certified</div>
+        </div>
+        <div>
+          <div><picture><img src="https://picsum.photos/seed/party1/600/600" alt="Party outfit" loading="lazy" /></picture></div>
+          <div>Party season</div>
+        </div>
+        <div>
+          <div><picture><img src="https://picsum.photos/seed/sport1/600/600" alt="Sport mode" loading="lazy" /></picture></div>
+          <div>Sport mode on</div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+         SECTION 4: TESTIMONIALS
+         AEM component: WKND Testimonials (multi-field tab list)
+         ══════════════════════════════════════════════════════════ -->
+    <div>
+      <div class="testimonials">
+
+        <!-- Header row -->
+        <div><div>
+          <h2>What our community says</h2>
+        </div></div>
+
+        <!-- Testimonial 1 -->
+        <div>
+          <div>
+            <picture><img src="https://picsum.photos/seed/alex/100/100" alt="Alex Rivera" loading="lazy" /></picture>
+            <strong>Alex Rivera</strong>
+            <em>Streetwear Enthusiast</em>
+          </div>
+          <div>
+            <blockquote>WKND Trendsetters completely changed how I approach my daily fit. The style guides are real, the people are genuine, and every drop they feature is fire. I've discovered so many brands I never would have found otherwise.</blockquote>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div>
+          <div>
+            <picture><img src="https://picsum.photos/seed/taylor/100/100" alt="Taylor Kim" loading="lazy" /></picture>
+            <strong>Taylor Kim</strong>
+            <em>Casual Style Blogger</em>
+          </div>
+          <div>
+            <blockquote>I've been following for two years and the content just keeps getting better. The casual style section is my bible — everything feels approachable and real, not just runway fantasy. My followers always ask where I find this stuff.</blockquote>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div>
+          <div>
+            <picture><img src="https://picsum.photos/seed/jordan/100/100" alt="Jordan Ellis" loading="lazy" /></picture>
+            <strong>Jordan Ellis</strong>
+            <em>Trend Spotter</em>
+          </div>
+          <div>
+            <blockquote>As someone who works in fashion, WKND Trendsetters is my pulse check on what's actually happening on the streets. Their coverage of underground scenes and emerging styles is unmatched by any mainstream publication I know of.</blockquote>
+          </div>
+        </div>
+
+        <!-- Testimonial 4 -->
+        <div>
+          <div>
+            <picture><img src="https://picsum.photos/seed/morgan/100/100" alt="Morgan Blake" loading="lazy" /></picture>
+            <strong>Morgan Blake</strong>
+            <em>Party Scene Curator</em>
+          </div>
+          <div>
+            <blockquote>Every event I style now starts with a deep dive through the WKND Trendsetters archive. Their night-out coverage is incredible — the photography captures the energy and the fashion in equal measure. Pure inspiration every time.</blockquote>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+         SECTION 5: LATEST ARTICLES CARDS
+         AEM component: WKND Cards (list-based content fragment)
+         ══════════════════════════════════════════════════════════ -->
+    <div>
+      <div class="cards">
+
+        <!-- Header row -->
+        <div><div>
+          <h2>Latest articles</h2>
+          <a href="/blog">View all</a>
+        </div></div>
+
+        <!-- Card 1 -->
+        <div>
+          <div><picture><img src="https://picsum.photos/seed/tennis/800/500" alt="Tennis style fashion" loading="lazy" /></picture></div>
+          <div>
+            <strong>Casual Cool</strong>
+            <em>May 12</em>
+            <h3>Tennis style, redefined</h3>
+            <p>The court isn't just for playing anymore. Discover how tennis aesthetics have broken out of the sports world and into everyday streetwear.</p>
+            <a href="/blog/tennis-style">Read more</a>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div>
+          <div><picture><img src="https://picsum.photos/seed/beachvibe/800/500" alt="Beach fashion" loading="lazy" /></picture></div>
+          <div>
+            <strong>Beach Vibes</strong>
+            <em>May 10</em>
+            <h3>Sunkissed and effortless</h3>
+            <p>Coastal style is having a major moment. From linen sets to shell jewellery, here's everything you need for your summer wardrobe.</p>
+            <a href="/blog/beach-style">Read more</a>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div>
+          <div><picture><img src="https://picsum.photos/seed/partyfits/800/500" alt="Party fashion" loading="lazy" /></picture></div>
+          <div>
+            <strong>Night Out</strong>
+            <em>May 8</em>
+            <h3>Party fits that pop</h3>
+            <p>When the lights go down and the music comes up, your outfit needs to deliver. These looks will make you the most memorable person in the room.</p>
+            <a href="/blog/party-fits">Read more</a>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div>
+          <div><picture><img src="https://picsum.photos/seed/sportstyle/800/500" alt="Sport fashion" loading="lazy" /></picture></div>
+          <div>
+            <strong>Sport Mode</strong>
+            <em>May 5</em>
+            <h3>Game on, style up</h3>
+            <p>Performance wear has never looked this good. The latest drop from our sport mode series blends athletic function with serious street credibility.</p>
+            <a href="/blog/sport-style">Read more</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+         SECTION 6: FAQ ACCORDION
+         AEM component: WKND Accordion (multi-field list)
+         ══════════════════════════════════════════════════════════ -->
+    <div>
+      <div class="accordion">
+
+        <!-- Header -->
+        <div><div>
+          <h2>Frequently asked questions</h2>
+        </div></div>
+
+        <!-- FAQ 1 -->
+        <div>
+          <div><h3>How do you identify what's actually trending?</h3></div>
+          <div>
+            <p>Our team of style scouts monitors street culture across major cities—New York, London, Tokyo, Lagos, and beyond. We combine on-the-ground reporting with social listening tools to separate genuine trend emergence from manufactured hype.</p>
+            <p>We never rely on brands to tell us what's trending—we go directly to the community.</p>
+          </div>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div>
+          <div><h3>Can I share my own style for the community to see?</h3></div>
+          <div>
+            <p>Absolutely. We love seeing real looks from real people. Tag your photos with <strong>#WKNDTrendsetters</strong> on Instagram or TikTok and our editorial team reviews community submissions weekly.</p>
+            <p>Outstanding submissions get featured in our Style Gallery and may be invited to contribute a full editorial piece.</p>
+          </div>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div>
+          <div><h3>Where do you find your style inspiration?</h3></div>
+          <div>
+            <p>Everywhere. Skate parks, music festivals, college campuses, night markets, sports arenas—style doesn't live in fashion weeks alone. Our editorial team draws from music, sport, art, and subcultures that rarely get mainstream coverage.</p>
+          </div>
+        </div>
+
+        <!-- FAQ 4 -->
+        <div>
+          <div><h3>How can I join the WKND Trendsetters community?</h3></div>
+          <div>
+            <p>Subscribe to our newsletter to get the freshest content delivered weekly. You can also follow us on Instagram, TikTok, and Pinterest for daily style drops.</p>
+            <p>For deeper involvement—contributing, collaborating, or brand partnerships—reach out via our <a href="/support/contact">contact page</a>.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- ══════════════════════════════════════════════════════════
+         FOOTER — populated dynamically by blocks/footer/footer.js
+         AEM source: /content/wknd-trendsetters/en/footer
+         ══════════════════════════════════════════════════════════ -->
+    <div>
+      <div class="footer">
+        <div><div><a href="/footer">Footer</a></div></div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer></footer>
+
+</body>
+</html>

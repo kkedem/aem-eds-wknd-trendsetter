@@ -1,34 +1,102 @@
-# Your Project's Title...
-Your project's description...
+# WKND Trendsetters — AEM + EDS
 
-## Environments
-- Preview: https://main--aem-eds-wknd-trendsetter--kkedem.aem.page/
-- Live: https://main--aem-eds-wknd-trendsetter--kkedem.aem.live/
+Fashion blog built on Adobe Edge Delivery Services (EDS) with content managed in AEM.
 
-## Documentation
+## Run locally
 
-Before using the aem-boilerplate, we recommand you to go through the documentation on https://www.aem.live/docs/ and more specifically:
-1. [Developer Tutorial](https://www.aem.live/developer/tutorial)
-2. [The Anatomy of a Project](https://www.aem.live/developer/anatomy-of-a-project)
-3. [Web Performance](https://www.aem.live/developer/keeping-it-100)
-4. [Markup, Sections, Blocks, and Auto Blocking](https://www.aem.live/developer/markup-sections-blocks)
+You need a static file server that serves ES modules correctly (`text/javascript` MIME type). **Do not open `index.html` directly in the browser** — ES module imports will fail over `file://`.
 
-## Installation
+### Option 1 — Node `http-server` (quickest)
 
-```sh
-npm i
+```bash
+npx http-server . -p 3000 -c-1 --cors
 ```
 
-## Linting
+Then open: **http://localhost:3000**
 
-```sh
-npm run lint
+### Option 2 — Python
+
+```bash
+# Python 3
+python3 -m http.server 3000
 ```
 
-## Local development
+Then open: **http://localhost:3000**
 
-1. Create a new repository based on the `aem-boilerplate` template
-1. Add the [AEM Code Sync GitHub App](https://github.com/apps/aem-code-sync) to the repository
-1. Install the [AEM CLI](https://github.com/adobe/helix-cli): `npm install -g @adobe/aem-cli`
-1. Start AEM Proxy: `aem up` (opens your browser at `http://localhost:3000`)
-1. Open the `aem-eds-wknd-trendsetter` directory in your favorite IDE and start coding :)
+### Option 3 — VS Code Live Server extension
+
+1. Install the **Live Server** extension (ritwickdey.liveserver)
+2. Right-click `index.html` → **Open with Live Server**
+
+---
+
+## Project structure
+
+```
+aem-eds-ue/
+├── index.html              # Full page (simulates AEM Publish output)
+├── nav.html                # Nav fragment fetched by nav.js
+├── footer.html             # Footer fragment fetched by footer.js
+├── fstab.yaml              # EDS mount points → AEM Publish URLs
+├── paths.json              # AEM JCR path → EDS URL mappings
+│
+├── styles/
+│   ├── styles.css          # Global tokens, typography, layout (loaded eagerly)
+│   └── lazy-styles.css     # Animations, scrollbar (loaded after LCP)
+│
+├── scripts/
+│   ├── aem.js              # EDS runtime: block auto-loader, CSS/JS injector
+│   └── scripts.js          # Page init pipeline (eager → lazy → delayed)
+│
+└── blocks/
+    ├── nav/                # Sticky header with dropdowns + mobile hamburger
+    ├── hero/               # Full-viewport image carousel (3 slides, auto-play)
+    ├── breadcrumb/         # Accessible breadcrumb trail
+    ├── article-header/     # Category label, title, author, date, read time
+    ├── gallery/            # 8-image responsive grid with lightbox
+    ├── testimonials/       # Tabbed testimonials with avatar + star rating
+    ├── cards/              # Article cards grid with hover lift effect
+    ├── accordion/          # FAQ expandable items with keyboard navigation
+    └── footer/             # Multi-column footer + newsletter sign-up
+```
+
+---
+
+## How blocks work
+
+Each block follows the EDS convention:
+
+```
+blocks/
+  hero/
+    hero.css   ← auto-injected into <head> when block is on the page
+    hero.js    ← auto-imported as ES module; exports default decorate(block)
+```
+
+`aem.js` discovers every `<div class="hero">` in the DOM, then loads `/blocks/hero/hero.css` and `/blocks/hero/hero.js` automatically. No bundler, no build step.
+
+---
+
+## AEM + MSM + Translation flow
+
+```
+AEM Author
+  └── Blueprint (/content/wknd-trendsetters/en)
+        ├── MSM Rollout → /de  (German Live Copy)
+        ├── MSM Rollout → /fr  (French Live Copy)
+        └── MSM Rollout → /es  (Spanish Live Copy)
+              └── Translation Workflow → TMS → back to Live Copy
+                    └── Activate → AEM Publish
+                          └── EDS syncs via fstab.yaml mount points
+                                └── Edge CDN serves to end users
+```
+
+CSS and JS in this GitHub repo are **shared across all locales** — only content changes per language. Brand theming per locale is handled via CSS custom properties in `styles/styles.css`.
+
+---
+
+## Connect to real AEM
+
+1. Update `fstab.yaml` — replace the placeholder AEM Publish URLs with your actual environment URLs
+2. Update `paths.json` — adjust the JCR path mappings to match your content structure
+3. Push this repo to GitHub and connect it to your EDS project via the AEM Sidekick plugin

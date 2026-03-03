@@ -1,0 +1,10 @@
+{
+  "mappings": [
+    "/content/wknd-trendsetters/en/:/",
+    "/content/wknd-trendsetters/de/:/de/",
+    "/content/wknd-trendsetters/fr/:/fr/",
+    "/content/wknd-trendsetters/es/:/es/",
+    "/content/wknd-trendsetters/en/nav:/nav",
+    "/content/wknd-trendsetters/en/footer:/footer"
+  ]
+}

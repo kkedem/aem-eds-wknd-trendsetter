@@ -1,37 +1,237 @@
-.hero-container .hero-wrapper {
-  max-width: unset;
-  padding: 0;
-}
+/* ── Hero Block ────────────────────────────────────────────────────
+ * Full-viewport carousel with overlaid text, slide indicators,
+ * and prev/next controls.
+ * ─────────────────────────────────────────────────────────────── */
 
-.hero {
+.hero.block {
   position: relative;
-  padding: 40px 24px;
-  min-height: 300px;
+  width: 100%;
+  height: 90vh;
+  min-height: 560px;
+  max-height: 860px;
+  overflow: hidden;
+  background: var(--color-black);
 }
 
-.hero h1 {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  color: var(--background-color);
+/* ── Slides container ──────────────────────────────────────────── */
+.hero-slides {
+  display: flex;
+  height: 100%;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
 }
 
-.hero picture {
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  object-fit: cover;
-  box-sizing: border-box;
-}
-
-.hero img {
-  object-fit: cover;
+.hero-slide {
+  position: relative;
+  flex: 0 0 100%;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 
-@media (width >= 900px) {
-  .hero {
-    padding: 40px 32px;
+.hero-slide picture,
+.hero-slide img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.05);
+  transition: transform 8s ease;
+}
+
+.hero-slide.active img {
+  transform: scale(1);
+}
+
+/* ── Overlay gradient ──────────────────────────────────────────── */
+.hero-slide::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(15, 23, 42, 0.75) 0%,
+    rgba(15, 23, 42, 0.3) 60%,
+    transparent 100%
+  );
+}
+
+/* ── Text content ──────────────────────────────────────────────── */
+.hero-content {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 var(--space-4xl);
+  max-width: 680px;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--text-xs);
+  font-weight: var(--font-semibold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--space-md);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease 0.1s, transform 0.6s ease 0.1s;
+}
+
+.hero-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 32px;
+  height: 2px;
+  background: var(--color-accent);
+}
+
+.hero-title {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: var(--font-bold);
+  line-height: 1.1;
+  color: var(--color-white);
+  margin-bottom: var(--space-lg);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease 0.25s, transform 0.6s ease 0.25s;
+}
+
+.hero-description {
+  font-size: var(--text-lg);
+  color: rgba(255,255,255,0.8);
+  line-height: 1.7;
+  margin-bottom: var(--space-xl);
+  max-width: 520px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease 0.4s, transform 0.6s ease 0.4s;
+}
+
+.hero-cta {
+  display: flex;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease 0.55s, transform 0.6s ease 0.55s;
+}
+
+/* Animate in the active slide's content */
+.hero-slide.active .hero-eyebrow,
+.hero-slide.active .hero-title,
+.hero-slide.active .hero-description,
+.hero-slide.active .hero-cta {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Navigation arrows ─────────────────────────────────────────── */
+.hero-prev,
+.hero-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: var(--radius-full);
+  color: var(--color-white);
+  cursor: pointer;
+  transition: background var(--transition-base), transform var(--transition-base);
+}
+
+.hero-prev { left: var(--space-xl); }
+.hero-next { right: var(--space-xl); }
+
+.hero-prev:hover,
+.hero-next:hover {
+  background: rgba(255,255,255,0.25);
+  transform: translateY(-50%) scale(1.05);
+}
+
+.hero-prev svg,
+.hero-next svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ── Indicators ────────────────────────────────────────────────── */
+.hero-indicators {
+  position: absolute;
+  bottom: var(--space-xl);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  gap: var(--space-sm);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.hero-indicators button {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  border: none;
+  background: rgba(255,255,255,0.4);
+  cursor: pointer;
+  padding: 0;
+  transition: background var(--transition-base), width var(--transition-base);
+}
+
+.hero-indicators button.active {
+  background: var(--color-white);
+  width: 28px;
+}
+
+/* ── Responsive ────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .hero.block {
+    height: 75vh;
+    min-height: 480px;
   }
+
+  .hero-content {
+    padding: 0 var(--space-lg);
+    justify-content: flex-end;
+    padding-bottom: var(--space-4xl);
+  }
+
+  .hero-slide::after {
+    background: linear-gradient(
+      to top,
+      rgba(15, 23, 42, 0.85) 0%,
+      rgba(15, 23, 42, 0.3) 60%,
+      transparent 100%
+    );
+  }
+
+  .hero-prev,
+  .hero-next {
+    width: 40px;
+    height: 40px;
+  }
+
+  .hero-prev { left: var(--space-md); }
+  .hero-next { right: var(--space-md); }
 }
